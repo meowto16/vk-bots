@@ -1,0 +1,25 @@
+{
+  "name": "vk-bots",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meowto16/vk-bots.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meowto16/vk-bots/issues"
+  },
+  "homepage": "https://github.com/meowto16/vk-bots#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "sequelize": "^6.17.0"
+  },
+  "type": "module"
+}

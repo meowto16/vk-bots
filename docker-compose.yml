@@ -1,8 +1,16 @@
 version: '3.1'
 
 services:
-
-  db:
+  node:
+    build: .
+    container_name: 'vk-bots-node'
+    depends_on:
+      - postgres
+    ports:
+      - "${PORT}:3000"
+    environment:
+      NODE_ENV: "${NODE_ENV}"
+  postgres:
     container_name: 'vk-bots-postgres'
     image: postgres:14.2
     restart: always
