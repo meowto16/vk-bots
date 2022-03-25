@@ -31,6 +31,14 @@ class Configuration {
     static get postgresDb() {
         return process.env.POSTGRES_DB
     }
+
+    /**
+     * Postgres username
+     * @return {string}
+     */
+    static get postgresUsername() {
+        return process.env.POSTGRES_USERNAME
+    }
 }
 
 export default Configuration
