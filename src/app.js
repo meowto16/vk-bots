@@ -26,7 +26,7 @@ app.get('/', async (req, res) => {
     const response = await sequelize.query('SELECT * FROM users', { type: QueryTypes.SELECT })
 
     res.json({
-        hello: 'world',
+        hello: 'worlds',
         response
     })
 })
