@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
-import {QueryTypes, Sequelize} from "sequelize"
+import pg from 'pg'
 
 import Environment from "./core/utils/classes/Environment.js"
 import Configuration from "./core/utils/classes/Configuration.js"
@@ -16,17 +16,13 @@ app.listen(Configuration.port, () => {
 })
 
 app.get('/', async (req, res) => {
-    const sequelize = new Sequelize({
-        dialect: 'postgres',
-        database: Configuration.postgresDb,
-        password: Configuration.postgresPassword,
-        username: Configuration.postgresUsername
+    const pool = new pg.Pool()
+    pool.query('SELECT NOW()', (err, res) => {
+        console.log(err, res)
+        pool.end()
     })
 
-    const response = await sequelize.query('SELECT * FROM users', { type: QueryTypes.SELECT })
-
     res.json({
-        hello: 'worlds',
-        response
+        hello: 'worlds'
     })
 })
