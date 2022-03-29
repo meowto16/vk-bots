@@ -1,7 +1,7 @@
 {
   "name": "vk-bots",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bot for counting nexias",
   "main": "src/app.js",
   "scripts": {
     "start": "node ./src/app.js",
