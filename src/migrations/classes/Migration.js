@@ -1,4 +1,6 @@
 class Migration {
+
+
     async up(pool) {
         throw new Error('Up migration is not implemented')
     }

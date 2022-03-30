@@ -1,13 +1,12 @@
 import { URL } from "url";
 import path from "path";
+import fs from "fs";
 
-const __filename = new URL('', import.meta.url).pathname
-const __dirname = new URL('.', import.meta.url).pathname
+export const __filename = new URL('', import.meta.url).pathname
+export const __dirname = new URL('.', import.meta.url).pathname
 
-const MIGRATIONS_DIR = path.resolve(__dirname, '..')
+export const MIGRATIONS_DIR = path.resolve(__dirname, '..')
+export const MIGRATIONS_TABLE_NAME = 'migrations'
+export const MIGRATIONS_TABLE_NAME_COLUMN = 'migration_name'
 
-export {
-    __filename,
-    __dirname,
-    MIGRATIONS_DIR
-}
+export const migrations = fs.readdirSync(MIGRATIONS_DIR).filter(file => file.endsWith('.migration.js'))
