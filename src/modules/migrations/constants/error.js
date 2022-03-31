@@ -42,3 +42,13 @@ export const ERR_MIGRATION_DIRECTOR_RUN_MIGRATIONS = {
     code: 108,
     message: 'Migration director: error while trying to run migrations'
 }
+
+export const ERR_MIGRATION_DIRECTOR_DOWN_LAST_MIGRATION = {
+    code: 109,
+    message: `Migration director: error while trying to down last migration`
+}
+
+export const ERR_MIGRATION_DIRECTOR_DOWN_LAST_MIGRATION_NOT_FOUND = {
+    code: 110,
+    message: `Migration director: error while trying to down last migration. Not found last migration`
+}

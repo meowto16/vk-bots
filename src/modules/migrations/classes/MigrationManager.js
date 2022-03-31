@@ -14,9 +14,13 @@ import {
     ERR_MIGRATION_DIRECTOR_CHECK_MIGRATIONS_TABLE,
     ERR_MIGRATION_DIRECTOR_CLOSE,
     ERR_MIGRATION_DIRECTOR_CONNECT,
+    ERR_MIGRATION_DIRECTOR_DOWN_LAST_MIGRATION,
+    ERR_MIGRATION_DIRECTOR_DOWN_LAST_MIGRATION_NOT_FOUND,
     ERR_MIGRATION_DIRECTOR_INITIAL_MIGRATION_RUN,
     ERR_MIGRATION_DIRECTOR_INITIAL_MIGRATION_RUN_NOT_FOUND,
-    ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS, ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS_FROM_DATABASE
+    ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS,
+    ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS_FROM_DATABASE,
+    ERR_MIGRATION_DIRECTOR_RUN_MIGRATIONS
 } from "../constants/error.js";
 
 import MigrationError from "./MigrationError.js";
@@ -27,8 +31,12 @@ class MigrationManager {
         this.client = null
         this.initialMigration = null
         this.migrations = []
-        this.migrationsFromDatabase = {}
+        this.migrationsFromDatabase = {
+            byKey: {},
+            arr: [],
+        }
     }
+
 
     async connect() {
         try {
@@ -49,17 +57,95 @@ class MigrationManager {
     }
 
     async init() {
-        const isMigrationTableExist = await this.checkMigrationTableExist()
-        this.loadMigrations(migrations, { initialMigration: INITIAL_MIGRATION_NAME })
+        const isMigrationTableExist = await this.#checkMigrationTableExist()
+        this.#loadMigrations(migrations, { initialMigration: INITIAL_MIGRATION_NAME })
 
         if (!isMigrationTableExist) {
-            await this.runInitialMigration()
+            await this.#runInitialMigration()
         }
 
-        await this.loadMigrationsFromDatabase()
+        await this.#loadMigrationsFromDatabase()
     }
 
-    async checkMigrationTableExist() {
+    async runMigrations({
+        onMigrationSuccess,
+        onMigrationFailed,
+        onMigrationExist
+    }) {
+        try {
+            for (const item of this.migrations) {
+                if (this.migrationsFromDatabase.byKey[item.migrationName]) {
+                    onMigrationExist?.(item)
+                    continue
+                }
+
+                const { default: MigrationClass } = await item.migration
+                const migration = new MigrationClass(item.migrationName)
+
+                try {
+                    await migration.up(this.client)
+                    await migration.remember(this.client)
+                    onMigrationSuccess?.(item)
+                } catch (error) {
+                    onMigrationFailed?.(item, error)
+                }
+            }
+        } catch (error) {
+            throw new MigrationError(ERR_MIGRATION_DIRECTOR_RUN_MIGRATIONS, error)
+        }
+    }
+
+    async downLastMigration() {
+        if (!this.migrationsFromDatabase.arr.length) {
+            return
+        }
+
+        const allMigrations = [
+            ...(this.initialMigration && [this.initialMigration]),
+            ...(this.migrations.length && this.migrations)
+        ]
+
+        const lastMigrationName = this.migrationsFromDatabase.arr.slice(-1)[0]
+        const lastMigrationItemIndex = allMigrations.findIndex(migration => migration.migrationName === lastMigrationName)
+
+        if (lastMigrationItemIndex === -1) {
+            throw new MigrationError(ERR_MIGRATION_DIRECTOR_DOWN_LAST_MIGRATION_NOT_FOUND)
+        }
+
+        try {
+            const isInitialMigration = lastMigrationItemIndex === 0
+            const lastMigrationItem = allMigrations[lastMigrationItemIndex]
+
+            const { default: MigrationClass } = await lastMigrationItem.migration
+            const migration = new MigrationClass(lastMigrationItem.migrationName)
+
+            if (!isInitialMigration) {
+                await migration.down(this.client)
+                await migration.forget(this.client)
+            }
+
+            return !isInitialMigration && lastMigrationItem
+        } catch (error) {
+            throw new MigrationError(ERR_MIGRATION_DIRECTOR_DOWN_LAST_MIGRATION, error)
+        }
+    }
+
+    async #runInitialMigration() {
+        if (!this.initialMigration) {
+            throw new MigrationError(ERR_MIGRATION_DIRECTOR_INITIAL_MIGRATION_RUN_NOT_FOUND)
+        }
+
+        try {
+            const { default: MigrationClass } = await this.initialMigration.migration
+            const migration = new MigrationClass(this.initialMigration.migrationName)
+            await migration.up(this.client)
+            await migration.remember(this.client)
+        } catch (error) {
+            throw new MigrationError(ERR_MIGRATION_DIRECTOR_INITIAL_MIGRATION_RUN, error)
+        }
+    }
+
+    async #checkMigrationTableExist() {
         try {
             const { rows } = await this.client.query(`
                 SELECT EXISTS (
@@ -75,7 +161,23 @@ class MigrationManager {
         }
     }
 
-    loadMigrations(paths, { initialMigration }) {
+    async #loadMigrationsFromDatabase() {
+        try {
+            const response = await this.client.query(`
+                SELECT ${MIGRATIONS_TABLE_NAME_COLUMN} FROM ${MIGRATIONS_TABLE_NAME}`
+            )
+
+            this.migrationsFromDatabase = response.rows.reduce((acc, { migration_name }) => {
+                acc.byKey[migration_name] = true
+                acc.arr.push(migration_name);
+                return acc
+            }, { byKey: {}, arr: [] })
+        } catch (error) {
+            throw new MigrationError(ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS_FROM_DATABASE, error)
+        }
+    }
+
+    #loadMigrations(paths, { initialMigration }) {
         try {
             this.migrations = paths.map((file) => ({
                 filename: file,
@@ -89,60 +191,6 @@ class MigrationManager {
             this.migrations = this.migrations.filter(migration => migration.migrationName !== initialMigration)
         } catch (error) {
             throw new MigrationError(ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS, error)
-        }
-    }
-
-    async loadMigrationsFromDatabase() {
-        try {
-            const response = await this.client.query(`
-                SELECT ${MIGRATIONS_TABLE_NAME_COLUMN} FROM ${MIGRATIONS_TABLE_NAME}`
-            )
-
-            this.migrationsFromDatabase = response.rows.reduce((acc, { migration_name }) => {
-                acc[migration_name] = true
-                return acc
-            }, {})
-        } catch (error) {
-            throw new MigrationError(ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS_FROM_DATABASE, error)
-        }
-    }
-
-    async runMigrations({
-        onMigrationSuccess,
-        onMigrationFailed,
-        onMigrationExist
-    }) {
-        for (const item of this.migrations) {
-            if (this.migrationsFromDatabase[item.migrationName]) {
-                onMigrationExist?.(item)
-                continue
-            }
-
-            const { default: MigrationClass } = await item.migration
-            const migration = new MigrationClass(item.migrationName)
-
-            try {
-                await migration.up(this.client)
-                await migration.remember(this.client)
-                onMigrationSuccess?.(item)
-            } catch (error) {
-                onMigrationFailed?.(item, error)
-            }
-        }
-    }
-
-    async runInitialMigration() {
-        if (!this.initialMigration) {
-            throw new MigrationError(ERR_MIGRATION_DIRECTOR_INITIAL_MIGRATION_RUN_NOT_FOUND)
-        }
-
-        try {
-            const { default: MigrationClass } = await this.initialMigration.migration
-            const migration = new MigrationClass(this.initialMigration.migrationName)
-            await migration.up(this.client)
-            await migration.remember(this.client)
-        } catch (error) {
-            throw new MigrationError(ERR_MIGRATION_DIRECTOR_INITIAL_MIGRATION_RUN, error)
         }
     }
 }
