@@ -32,3 +32,13 @@ export const ERR_MIGRATION_DIRECTOR_INITIAL_MIGRATION_RUN = {
     code: 106,
     message: 'Migration director: error while trying to run initial migration'
 }
+
+export const ERR_MIGRATION_DIRECTOR_LOAD_MIGRATIONS_FROM_DATABASE = {
+    code: 107,
+    message: 'Migration director: error while trying to run load migrations from database'
+}
+
+export const ERR_MIGRATION_DIRECTOR_RUN_MIGRATIONS = {
+    code: 108,
+    message: 'Migration director: error while trying to run migrations'
+}

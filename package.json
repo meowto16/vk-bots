@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./src/app.js",
     "dev": "nodemon",
-    "migration:run": "node ./src/migrations/scripts/run.js",
-    "migration:down": "node ./src/migrations/scripts/down.js"
+    "migration:run": "node ./src/modules/migrations/scripts/run.js",
+    "migration:down": "node ./src/modules/migrations/scripts/down.js"
   },
   "repository": {
     "type": "git",
