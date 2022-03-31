@@ -1,11 +1,9 @@
 class Migration {
-
-
-    async up(pool) {
+    async up(client) {
         throw new Error('Up migration is not implemented')
     }
 
-    async down(pool) {
+    async down(client) {
         throw new Error('Down migration is not implemented')
     }
 }
