@@ -1,4 +1,4 @@
-import {MIGRATIONS_TABLE_NAME, MIGRATIONS_TABLE_NAME_COLUMN} from "../constants/base.js";
+import { MIGRATIONS_TABLE_NAME, MIGRATIONS_TABLE_NAME_COLUMN } from "../constants/base.js";
 
 class Migration {
     constructor(migrationName) {

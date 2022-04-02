@@ -37,7 +37,6 @@ class MigrationManager {
         }
     }
 
-
     async connect() {
         try {
             this.pool = new pg.Pool({})
