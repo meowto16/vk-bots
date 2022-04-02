@@ -5,7 +5,7 @@ class AddUsersTableMigration extends Migration {
         await client.query(`
             CREATE TABLE users (
                 user_id UUID DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
-                vk_login VARCHAR(255) NOT NULL
+                vk_login VARCHAR(255) NOT NULL UNIQUE
             )`
         )
     }

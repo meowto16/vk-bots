@@ -1,28 +1,23 @@
 import 'dotenv/config'
 import express from 'express'
-import pg from 'pg'
+import bodyParser from 'body-parser'
 
 import Environment from "./core/utils/classes/Environment.js"
 import Configuration from "./core/utils/classes/Configuration.js"
 
+import Logger from "./core/utils/classes/Logger.js";
+import UserRouter from "./modules/users/User.router.js";
+
 const app = express()
 
+app.use(bodyParser.json())
+
+app.use(UserRouter.base, UserRouter.router)
+
 app.listen(Configuration.port, () => {
-    console.log(`Server running is running on...`)
-    console.log(Environment.getVariable({
+    Logger.info(`Server running is running on...`)
+    Logger.info(Environment.getVariable({
         [Environment.DEVELOP_ENVIRONMENT]: `http://localhost:${Configuration.port}`,
         [Environment.PRODUCTION_ENVIRONMENT]: `https://vk-bots.herokuapp.com`
     }))
-})
-
-app.get('/', async (req, res) => {
-    const pool = new pg.Pool()
-    pool.query('SELECT NOW()', (err, res) => {
-        console.log(err, res)
-        pool.end()
-    })
-
-    res.json({
-        hello: 'worlds'
-    })
 })
