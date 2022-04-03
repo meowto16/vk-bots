@@ -1,6 +1,6 @@
-import { URL } from "url";
-import path from "path";
-import fs from "fs";
+import { URL } from 'url'
+import path from 'path'
+import fs from 'fs'
 
 export const __filename = new URL('', import.meta.url).pathname
 export const __dirname = new URL('.', import.meta.url).pathname

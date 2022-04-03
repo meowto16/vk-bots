@@ -2,11 +2,11 @@ import 'dotenv/config'
 import express from 'express'
 import bodyParser from 'body-parser'
 
-import Environment from "./core/utils/classes/Environment.js"
-import Configuration from "./core/utils/classes/Configuration.js"
+import Environment from './core/utils/classes/Environment.js'
+import Configuration from './core/utils/classes/Configuration.js'
 
-import Logger from "./core/utils/classes/Logger.js";
-import UserRouter from "./modules/users/User.router.js";
+import Logger from './core/utils/classes/Logger.js'
+import UserRouter from './modules/users/User.router.js'
 
 const app = express()
 
@@ -15,9 +15,9 @@ app.use(bodyParser.json())
 app.use(UserRouter.base, UserRouter.router)
 
 app.listen(Configuration.port, () => {
-    Logger.info(`Server running is running on...`)
-    Logger.info(Environment.getVariable({
-        [Environment.DEVELOP_ENVIRONMENT]: `http://localhost:${Configuration.port}`,
-        [Environment.PRODUCTION_ENVIRONMENT]: `https://vk-bots.herokuapp.com`
-    }))
+  Logger.info('Server running is running on...')
+  Logger.info(Environment.getVariable({
+    [Environment.DEVELOP_ENVIRONMENT]: `http://localhost:${Configuration.port}`,
+    [Environment.PRODUCTION_ENVIRONMENT]: 'https://vk-bots.herokuapp.com'
+  }))
 })
