@@ -2,7 +2,7 @@ import pg from 'pg'
 
 import RepositoryError from "./RepositoryError.js";
 
-import {ERR_REPOSITORY_CLOSE, ERR_REPOSITORY_CONNECT} from "../constants/error.js";
+import {ERR_REPOSITORY_CLOSE, ERR_REPOSITORY_CONNECT} from "../constants/repositoryError.js";
 
 class Repository {
     constructor() {

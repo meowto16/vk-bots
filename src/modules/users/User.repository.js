@@ -1,4 +1,4 @@
-import Repository from "../../core/repositories/classes/Repository.js";
+import Repository from "../../core/classes/Repository.js";
 
 class UserRepository extends Repository {
     async get() {
