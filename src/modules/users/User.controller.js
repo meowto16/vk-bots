@@ -14,6 +14,7 @@ class UserController extends Controller {
     res.statusCode = 201
     res.json(createdUser)
   }
+
 }
 
 export default UserController
