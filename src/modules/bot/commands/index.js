@@ -1,12 +1,15 @@
 import addNexiaCommand from './add-nexia.command.js'
 import syncUsersCommand from './sync-users.command.js'
+import ratingCommand from './rating.command.js'
 
 export const CommandType = {
-  SYNC_USERS: '/sync-users'
+  SYNC_USERS: '/sync-users',
+  RATING: '/rating'
 }
 
 export const CommandMap = {
   [CommandType.SYNC_USERS]: syncUsersCommand,
+  [CommandType.RATING]: ratingCommand,
   '/1': addNexiaCommand,
   '/2': addNexiaCommand,
   '/3': addNexiaCommand,

@@ -41,6 +41,16 @@ class UserRepository extends Repository {
     return rows
   }
 
+  async getUsersWithNexias() {
+    const { rows } = await this.client.query(`
+      SELECT *
+      FROM users
+      JOIN nexias on users.user_id = nexias.belongs_to_user_id
+    `)
+
+    return rows
+  }
+
   async create({ vk_login }) {
     const { rows } = await this.client.query(`
       INSERT INTO users(vk_login)

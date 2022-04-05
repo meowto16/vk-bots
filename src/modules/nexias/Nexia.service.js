@@ -46,8 +46,6 @@ class NexiaService extends Service {
       belongs_to_user_id
     })
 
-    console.log(updatedNexia)
-
     await nexiaRepository.close()
 
     return updatedNexia

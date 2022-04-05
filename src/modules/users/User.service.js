@@ -43,13 +43,35 @@ class UserService extends Service {
 
     await userRepository.close()
 
-    const score = userNexias.reduce((acc, { count }) => {
-      acc += count
+    return UserService.#calculateUserScore(userNexias)
+  }
+
+  static async getUsersScoreMap() {
+    const userRepository = new UserRepository()
+    await userRepository.connect()
+
+    const nexiasRows = await userRepository.getUsersWithNexias()
+
+    await userRepository.close()
+    
+    const userNexiaMap = nexiasRows.reduce((acc, row) => {
+      if (!acc[row.vk_login]) {
+        acc[row.vk_login] = []
+      }
+
+      acc[row.vk_login].push(row)
 
       return acc
-    }, 0)
+    }, {})
 
-    return score
+    return Object
+      .entries(userNexiaMap)
+      .map(([id, nexias]) => [id, UserService.#calculateUserScore(nexias)])
+      .reduce((acc, [id, score]) => {
+        acc[id] = score
+
+        return acc
+      }, {})
   }
 
   static async create({ vk_login }) {
@@ -83,6 +105,14 @@ class UserService extends Service {
     await userRepository.close()
 
     return deletedUser
+  }
+
+  static #calculateUserScore(nexias = []) {
+    return nexias.reduce((acc, { count }) => {
+      acc += count
+
+      return acc
+    }, 0)
   }
 }
 
