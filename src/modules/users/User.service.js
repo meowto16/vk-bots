@@ -35,6 +35,23 @@ class UserService extends Service {
     return user
   }
 
+  static async getUserScore({ vk_login }) {
+    const userRepository = new UserRepository()
+    await userRepository.connect()
+
+    const userNexias = await userRepository.getUserNexiasByVkLogin({ vk_login })
+
+    await userRepository.close()
+
+    const score = userNexias.reduce((acc, { count }) => {
+      acc += count
+
+      return acc
+    }, 0)
+
+    return score
+  }
+
   static async create({ vk_login }) {
     const userRepository = new UserRepository()
     await userRepository.connect()
