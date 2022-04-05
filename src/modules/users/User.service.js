@@ -39,8 +39,7 @@ class UserService extends Service {
     const userRepository = new UserRepository()
     await userRepository.connect()
 
-    await userRepository.create({ vk_login })
-    const createdUser = await userRepository.getByVkLogin(vk_login)
+    const createdUser = await userRepository.create({ vk_login })
 
     await userRepository.close()
 
@@ -51,14 +50,7 @@ class UserService extends Service {
     const userRepository = new UserRepository()
     await userRepository.connect()
 
-    const userToUpdate = await userRepository.getByUserId(user_id)
-
-    if (!userToUpdate) {
-      return null
-    }
-
-    await userRepository.update({ user_id, payload })
-    const updatedUser = await userRepository.getByUserId(user_id)
+    const updatedUser = await userRepository.update({ user_id, payload })
 
     await userRepository.close()
 
@@ -69,17 +61,11 @@ class UserService extends Service {
     const userRepository = new UserRepository()
     await userRepository.connect()
 
-    const userToDelete = await userRepository.getByUserId(user_id)
-
-    if (!userToDelete) {
-      return null
-    }
-
-    await userRepository.delete({ user_id })
+    const deletedUser = await userRepository.delete({ user_id })
 
     await userRepository.close()
 
-    return { user_id }
+    return deletedUser
   }
 }
 

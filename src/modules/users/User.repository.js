@@ -31,25 +31,34 @@ class UserRepository extends Repository {
   }
 
   async create({ vk_login }) {
-    await this.client.query(`
+    const { rows } = await this.client.query(`
       INSERT INTO users(vk_login)
       VALUES ($1)
+      RETURNING user_id, vk_login
     `, [vk_login])
+
+    return rows[0]
   }
 
   async update({ user_id, payload }) {
-    await this.client.query(`
+    const { rows } = await this.client.query(`
       UPDATE users
       SET vk_login = $2
       WHERE user_id = $1
+      RETURNING user_id, vk_login
     `, [user_id, payload.vk_login])
+
+    return rows[0]
   }
 
   async delete({ user_id }) {
-    await this.client.query(`
+    const { rows } = await this.client.query(`
       DELETE FROM users 
       WHERE user_id = $1
+      RETURNING user_id
     `, [user_id])
+
+    return rows[0]
   }
 }
 
