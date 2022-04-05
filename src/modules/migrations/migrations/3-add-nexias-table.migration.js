@@ -12,7 +12,7 @@ class AddNexiasTableMigration extends Migration {
                 belongs_to_user_id UUID         NOT NULL,
                 CONSTRAINT fk_belongs_to_user_id
                     FOREIGN KEY (belongs_to_user_id)
-                        REFERENCES users (user_id)
+                        REFERENCES users (user_id) ON DELETE CASCADE
             )
         `)
   }
