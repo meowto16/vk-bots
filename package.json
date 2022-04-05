@@ -8,7 +8,8 @@
     "dev": "nodemon",
     "migration:create": "node ./src/modules/migrations/scripts/create.js",
     "migration:run": "node ./src/modules/migrations/scripts/run.js",
-    "migration:down": "node ./src/modules/migrations/scripts/down.js"
+    "migration:down": "node ./src/modules/migrations/scripts/down.js",
+    "heroku-postbuild": "npm run migration:run"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,7 @@ import pg from 'pg'
 import RepositoryError from './RepositoryError.js'
 
 import { ERR_REPOSITORY_CLOSE, ERR_REPOSITORY_CONNECT } from '../constants/repositoryError.js'
+import { poolSettings } from '../constants/connect.js'
 
 class Repository {
   constructor() {
@@ -12,7 +13,7 @@ class Repository {
 
   async connect() {
     try {
-      this.pool = new pg.Pool({})
+      this.pool = new pg.Pool(poolSettings)
       this.client = await this.pool.connect()
 
       return this

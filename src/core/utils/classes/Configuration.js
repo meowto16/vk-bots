@@ -21,7 +21,7 @@ class Configuration {
      * @return {string}
      */
   static get postgresPassword() {
-    return process.env.POSTGRES_PASSWORD
+    return process.env.PGPASSWORD
   }
 
   /**
@@ -29,7 +29,19 @@ class Configuration {
      * @return {string}
      */
   static get postgresDb() {
-    return process.env.POSTGRES_DB
+    return process.env.PGDATABASE
+  }
+
+  static get postgresHost() {
+    return process.env.PGHOST
+  }
+
+  /**
+   * Postgres database name
+   * @return {string}
+   */
+  static get postgresDbPort() {
+    return process.env.PGPORT
   }
 
   /**
@@ -37,7 +49,11 @@ class Configuration {
      * @return {string}
      */
   static get postgresUsername() {
-    return process.env.POSTGRES_USERNAME
+    return process.env.PGUSER
+  }
+
+  static get postgresDatabaseUrl() {
+    return process.env.DATABASE_URL
   }
 }
 

@@ -24,6 +24,7 @@ import {
 } from '../constants/error.js'
 
 import MigrationError from './MigrationError.js'
+import { poolSettings } from '../../../core/constants/connect.js'
 
 class MigrationManager {
   constructor() {
@@ -39,7 +40,7 @@ class MigrationManager {
 
   async connect() {
     try {
-      this.pool = new pg.Pool({})
+      this.pool = new pg.Pool(poolSettings)
       this.client = await this.pool.connect()
     } catch (error) {
       throw new MigrationError(ERR_MIGRATION_DIRECTOR_CONNECT, error)
