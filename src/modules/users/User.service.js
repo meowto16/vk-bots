@@ -13,6 +13,17 @@ class UserService extends Service {
     return users
   }
 
+  static async getById({ user_id }) {
+    const userRepository = new UserRepository()
+    await userRepository.connect()
+
+    const user = await userRepository.getByUserId(user_id)
+
+    await userRepository.close()
+
+    return user
+  }
+
   static async getByVkLogin({ vk_login }) {
     const userRepository = new UserRepository()
     await userRepository.connect()
