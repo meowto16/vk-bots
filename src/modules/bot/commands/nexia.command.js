@@ -1,6 +1,5 @@
-import 'node-vk-bot-api'
-
 const nexiaCommand = (ctx) => {
+  console.dir(ctx)
   ctx.reply`vrum-vrum`
 }
 
