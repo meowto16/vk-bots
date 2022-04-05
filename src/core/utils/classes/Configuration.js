@@ -55,6 +55,10 @@ class Configuration {
   static get postgresDatabaseUrl() {
     return process.env.DATABASE_URL
   }
+
+  static get vkPeerId() {
+    return process.env.VK_PEER_ID || 2000000001
+  }
 }
 
 export default Configuration

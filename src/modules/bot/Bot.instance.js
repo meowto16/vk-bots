@@ -6,6 +6,4 @@ const BotInstance = new VkBot({
   confirmation: process.env.VK_MESSAGES_CONFIRMATION,
 })
 
-console.log('once')
-
 export default BotInstance
