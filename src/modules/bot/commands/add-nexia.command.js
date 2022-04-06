@@ -4,11 +4,17 @@ import userService from '../../users/User.service.js'
 import nexiaService from '../../nexias/Nexia.service.js'
 
 const addNexiaCommand = async (ctx) => {
-  const photo = ctx.message?.attachments?.find(attachment => attachment.type === 'photo')
-
-  if (!photo) {
+  const photos = (ctx.message?.attachments || []).filter(attachment => attachment.type === 'photo')
+  
+  if (photos.length === 0) {
     return ctx.reply('Без фото не принимаю')
   }
+  
+  if (photos.length > 1) {
+    return ctx.reply('Принимаю только одно фото')
+  }
+
+  const photo = photos[0]
 
   const user = await userService.getByVkLogin({ vk_login: ctx.message.from_id })
 
