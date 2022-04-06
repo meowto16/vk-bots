@@ -3,12 +3,14 @@ import syncUsersCommand from './sync-users.command.js'
 import ratingCommand from './rating.command.js'
 import helpCommand from './help.command.js'
 import reportCommand from './report.command.js'
+import checkLohCommand from './check-loh.command.js'
 
 export const CommandType = {
   SYNC_USERS: '/sync-users',
   RATING: '/rating',
   HELP: '/help',
-  REPORT: '/report'
+  REPORT: '/report',
+  CHECK_LOH: '/check-loh',
 }
 
 export const CommandMap = {
@@ -16,6 +18,7 @@ export const CommandMap = {
   [CommandType.RATING]: ratingCommand,
   [CommandType.HELP]: helpCommand,
   [CommandType.REPORT]: reportCommand,
+  [CommandType.CHECK_LOH]: checkLohCommand,
   '/1': addNexiaCommand,
   '/2': addNexiaCommand,
   '/3': addNexiaCommand,
