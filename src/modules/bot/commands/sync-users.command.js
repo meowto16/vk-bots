@@ -11,7 +11,7 @@ const syncUsersCommand = async (ctx) => {
 
   const missedUsers = profiles
     .filter(profile => {
-      return users.findIndex(user => user.vk_login === profile.id) === -1
+      return !users.some(user => `${user.vk_login}` === `${profile.id}`)
     })
     .map(profile => ({
       vk_login: profile.id
