@@ -23,10 +23,10 @@ class NexiaRepository extends Repository {
   async create({
     image,
     count,
-    belongs_to_user_id
+    message_id,
   }) {
     const { rows } = await this.client.query(`
-      INSERT INTO nexias(image, count, belongs_to_user_id)
+      INSERT INTO nexias(image, count, message_id)
       VALUES ($1, $2, $3)
       RETURNING nexia_id, created_at, image, count, belongs_to_user_id
     `, [image, count, belongs_to_user_id])
