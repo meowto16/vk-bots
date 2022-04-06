@@ -24,18 +24,18 @@ class NexiaService extends Service {
     return foundNexia
   }
 
-  static async create({ image, count, belongs_to_user_id }) {
+  static async create({ image, count, belongs_to_user_id, message_id }) {
     const nexiaRepository = new NexiaRepository()
     await nexiaRepository.connect()
 
-    const createdNexia = await nexiaRepository.create({ image, count, belongs_to_user_id })
+    const createdNexia = await nexiaRepository.create({ image, count, belongs_to_user_id, message_id })
 
     await nexiaRepository.close()
 
     return createdNexia
   }
 
-  static async update({ nexia_id, image, count, belongs_to_user_id }) {
+  static async update({ nexia_id, image, count, belongs_to_user_id, message_id }) {
     const nexiaRepository = new NexiaRepository()
     await nexiaRepository.connect()
 
@@ -43,7 +43,8 @@ class NexiaService extends Service {
       nexia_id,
       image,
       count,
-      belongs_to_user_id
+      belongs_to_user_id,
+      message_id
     })
 
     await nexiaRepository.close()

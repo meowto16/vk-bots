@@ -28,6 +28,7 @@ const addNexiaCommand = async (ctx) => {
     image: photoUrl,
     count,
     belongs_to_user_id: user.user_id,
+    message_id: ctx.message.conversation_message_id
   })
 
   const userScore = await userService.getUserScore({ vk_login: user.vk_login })
