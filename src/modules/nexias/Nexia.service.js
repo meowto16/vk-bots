@@ -24,6 +24,17 @@ class NexiaService extends Service {
     return foundNexia
   }
 
+  static async getByMessageId({ message_id }) {
+    const nexiaRepository = new NexiaRepository()
+    await nexiaRepository.connect()
+
+    const foundNexia = await nexiaRepository.getByMessageId(message_id)
+
+    await nexiaRepository.close()
+
+    return foundNexia
+  }
+
   static async create({ image, count, belongs_to_user_id, message_id }) {
     const nexiaRepository = new NexiaRepository()
     await nexiaRepository.connect()

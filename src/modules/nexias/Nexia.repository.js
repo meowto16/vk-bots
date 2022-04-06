@@ -20,6 +20,17 @@ class NexiaRepository extends Repository {
     return rows[0]
   }
 
+  async getByMessageId(message_id) {
+    console.log(message_id)
+    const { rows } = await this.client.query(`
+        SELECT nexia_id, created_at, image, count, belongs_to_user_id, message_id
+        FROM nexias
+        WHERE message_id = $1
+    `, [message_id])
+
+    return rows[0]
+  }
+
   async create({
     image,
     count,
