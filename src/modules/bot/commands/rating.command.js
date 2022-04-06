@@ -18,7 +18,7 @@ const ratingCommand = async (ctx) => {
 
   ctx.reply(
     `🏆 Cписки лидеров:
-    ${users.map((user) => `[${user.score}] [id${user.id}|${user.firstName} ${user.lastName}]`).join('\n')}
+    ${users.map((user) => `[${user.score}] ${user.firstName} ${user.lastName}`).join('\n')}
     `
   )
 }
