@@ -16,9 +16,13 @@ const ratingCommand = async (ctx) => {
     }))
     .sort((a, b) => b.score - a.score)
 
+  const totalScore = users.reduce((acc, user) => acc + +user.score, 0)
+
   ctx.reply(
     `🏆 Cписки лидеров:
     ${users.map((user) => `[${user.score}] ${user.firstName} ${user.lastName}`).join('\n')}
+    
+    Total nexias: ${totalScore}    
     `
   )
 }
