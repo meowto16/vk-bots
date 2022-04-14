@@ -20,10 +20,10 @@ const ratingCommand = async (ctx) => {
 
   ctx.reply(
     `🏆 Cписки лидеров:
-    ${users.map((user) => `[${user.score}] ${user.firstName} ${user.lastName}`).join('\n')}
+${users.map((user) => `[${user.score}] ${user.firstName} ${user.lastName}`).join('\n')}
     
-    Total nexias: ${totalScore}    
-    `
+Всего нексий: ${totalScore}
+`
   )
 }
 
