@@ -3,6 +3,7 @@ import Configuration from '../../../core/utils/classes/Configuration.js'
 import plural from 'plural-ru'
 import { AKIO_POLICE } from '../../../core/constants/stickers.js'
 import UserService from '../../users/User.service.js'
+import createReplyChain from '../utils/createReplyChain.js'
 
 const reportCommand = async (ctx) => {
   if (!ctx.message.reply_message) {
@@ -35,14 +36,16 @@ const reportCommand = async (ctx) => {
 
   try {
     await NexiaService.delete({ nexia_id: nexia.nexia_id })
-    ctx.reply('✅ Успешно удалено')
-    setTimeout(() => {
-      ctx.reply(`[id${user.id}|${user.first_name} ${user.last_name}], кажется, ${plural(nexia.count, 'твою', 'твои')} `
-          + `${plural(nexia.count, 'нексию', 'нексии')} удалили. Впредь, будь внимательнее на дорогах, и пристегни ремни.`, AKIO_POLICE)
-    }, 200)
-    setTimeout(() => {
-      ctx.reply('', null, null, AKIO_POLICE)
-    }, 500)
+    const answer = createReplyChain(ctx)
+    
+    answer
+      .reply('Успешно удалено')
+      .reply(
+        `[id${user.id}|${user.first_name} ${user.last_name}], кажется, ${plural(nexia.count, 'твою', 'твои')} `
+          + `${plural(nexia.count, 'нексию', 'нексии')} удалили. `
+          + 'Впредь, будь внимательнее на дорогах, и пристегни ремни.'
+      )
+      .reply('', null, null, AKIO_POLICE)
   } catch (e) {
     return ctx.reply('Не удалось удалить. Попробуйте снова.')
   }
