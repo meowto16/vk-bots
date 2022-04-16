@@ -2,14 +2,17 @@ import plural from 'plural-ru'
 
 import userService from '../../users/User.service.js'
 import nexiaService from '../../nexias/Nexia.service.js'
+import createReplyChain from '../utils/createReplyChain.js'
+import { congratsByScore } from '../utils/congratsByScore.js'
+import { getUsersWithScore } from '../utils/getUsersWithScore.js'
 
 const addNexiaCommand = async (ctx) => {
   const photos = (ctx.message?.attachments || []).filter(attachment => attachment.type === 'photo')
-  
+
   if (photos.length === 0) {
     return ctx.reply('Без фото не принимаю')
   }
-  
+
   if (photos.length > 1) {
     return ctx.reply('Принимаю только одно фото')
   }
@@ -37,13 +40,18 @@ const addNexiaCommand = async (ctx) => {
     message_id: ctx.message.conversation_message_id
   })
 
-  const userScore = await userService.getUserScore({ vk_login: user.vk_login })
+  const usersProfiles = await getUsersWithScore(ctx)
+  const userProfile = usersProfiles.find(profile => +profile.id === +user.vk_login)
 
-  return ctx.reply(
+  const answer = createReplyChain(ctx)
+
+  answer.reply(
     `✅ ОК
     - ${plural(count, 'Добавлена', 'Добавлено', 'Добавлены')} ${count} ${plural(count, 'нексия', 'нексии', 'нексий')} 
-    - Твой счёт: ${userScore}
+    - Твой счёт: ${userProfile.score}
   `)
+
+  await congratsByScore(userProfile, answer)
 }
 
 export default addNexiaCommand
