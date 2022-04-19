@@ -1,1 +1,13 @@
 export const AKIO_POLICE = 50893
+export const AKIO_WINKS = 50865
+export const AKIO_STRONG = 50889
+export const AKIO_OMAEWA = 50872
+export const AKIO_BIRTHDAY = 50873
+export const AKIO_BATTLE = 50880
+export const AKIO_TAPPING = 50904
+export const AKIO_LAUGHING = 50902
+export const AKIO_NERD = 50905
+export const AKIO_WAITING = 50891
+export const AKIO_COOL = 50886
+export const AKIO_DANG = 50879
+export const AKIO_GOOD_BOY = 50871
