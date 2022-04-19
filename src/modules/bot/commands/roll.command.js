@@ -1,9 +1,7 @@
 const rollCommand = (ctx) => {
-  const text = ctx.message.text.replace('/roll', '').trim()
-  const defaultFrom = 0
-  const defaultTo = 10
+  const num = Math.round(Math.random() * 100)
 
-  // ctx.reply()
+  ctx.reply('Выпадает число: ' + num)
 }
 
 export default rollCommand
