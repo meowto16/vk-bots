@@ -7,12 +7,18 @@ import {
   AKIO_TAPPING,
   AKIO_WAITING,
   AKIO_BATTLE,
+  AKIO_WINKS,
+  AKIO_COOL,
 } from '../../../core/constants/stickers.js'
 
 export const SCORE_CONGRATULATIONS = {
   1: {
     message: 'Поздравим $USER$ с первой нексией!',
     sticker: AKIO_BIRTHDAY,
+  },
+  5: {
+    message: 'Моё уважение, пять нексий у $USER',
+    sticker: AKIO_WINKS,
   },
   10: {
     message: 'Ого! Кажется у $USER$ уже целых 10 нексий!',
@@ -25,6 +31,10 @@ export const SCORE_CONGRATULATIONS = {
   50: {
     message: 'Узбеки боялись $USER$. Найдет все нексии города... Уже 50 нексий!',
     sticker: AKIO_STRONG,
+  },
+  75: {
+    message: 'У $USER$ всё пучком. Уже 75 нексий!',
+    sticker: AKIO_COOL,
   },
   100: {
     message: 'Никто и подумать не мог, что $USER$ может вытворить... Уже 100 нексий!',
