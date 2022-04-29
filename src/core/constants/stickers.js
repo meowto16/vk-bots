@@ -11,3 +11,4 @@ export const AKIO_WAITING = 50891
 export const AKIO_COOL = 50886
 export const AKIO_DANG = 50879
 export const AKIO_GOOD_BOY = 50871
+export const AKIO_HORNY = 50882
