@@ -5,6 +5,6 @@ export const congratsByScore = async (user, answer) => {
   if (!congratulations) return
 
   return answer
-    .reply(congratulations.message.replace('$USER$', `[id${user.id}|${user.firstName} ${user.lastName}]`))
+    .reply(congratulations.message.replaceAll('$USER$', `[id${user.id}|${user.firstName} ${user.lastName}]`))
     .reply('', null, null, congratulations.sticker)
 }
