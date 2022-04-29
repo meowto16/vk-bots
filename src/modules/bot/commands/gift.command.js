@@ -16,7 +16,7 @@ const giftCommand = async (ctx) => {
   const recipientId = (recipientIdMatch || '').replace('id', '')
   
   if (!recipientId) {
-    return ctx.reply('Не указан одариваемый. Необходимо указать в формате "/gift @userId" и переслать сообщение')
+    return ctx.reply('Не указан одариваемый. Необходимо указать в формате "/gift @пользователь_которому_хотите_подарить" и переслать сообщение')
   }
 
   const nexia = await NexiaService.getByMessageId({
