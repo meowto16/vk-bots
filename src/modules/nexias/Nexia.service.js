@@ -46,6 +46,20 @@ class NexiaService extends Service {
     return createdNexia
   }
 
+  static async changeOwner({ nexia_id, belongs_to_user_id }) {
+    const nexiaRepository = new NexiaRepository()
+    await nexiaRepository.connect()
+
+    const updatedNexia = await nexiaRepository.changeOwner({
+      nexia_id,
+      belongs_to_user_id,
+    })
+
+    await nexiaRepository.close()
+
+    return updatedNexia
+  }
+
   static async update({ nexia_id, image, count, belongs_to_user_id, message_id }) {
     const nexiaRepository = new NexiaRepository()
     await nexiaRepository.connect()

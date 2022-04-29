@@ -21,7 +21,6 @@ class NexiaRepository extends Repository {
   }
 
   async getByMessageId(message_id) {
-    console.log(message_id)
     const { rows } = await this.client.query(`
         SELECT nexia_id, created_at, image, count, belongs_to_user_id, message_id
         FROM nexias
@@ -42,6 +41,17 @@ class NexiaRepository extends Repository {
       VALUES ($1, $2, $3, $4)
       RETURNING nexia_id, created_at, image, count, belongs_to_user_id, message_id
     `, [image, count, belongs_to_user_id, message_id])
+
+    return rows[0]
+  }
+
+  async changeOwner({ nexia_id, belongs_to_user_id }) {
+    const { rows } = await this.client.query(`
+      UPDATE nexias
+      SET belongs_to_user_id = $2
+      WHERE nexia_id = $1
+      RETURNING nexia_id, created_at, image, count, belongs_to_user_id
+    `, [nexia_id, belongs_to_user_id])
 
     return rows[0]
   }

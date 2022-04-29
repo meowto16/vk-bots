@@ -10,6 +10,7 @@ export const getUsersWithScore = async (ctx) => {
   const users = profiles
     .map(profile => ({
       id: profile.id,
+      nickname: profile.screen_name,
       firstName: profile.first_name,
       lastName: profile.last_name,
       score: userRatingMap[profile.id] || 0

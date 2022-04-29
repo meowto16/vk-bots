@@ -5,7 +5,7 @@ import helpCommand from './help.command.js'
 import reportCommand from './report.command.js'
 import checkLohCommand from './check-loh.command.js'
 import rollCommand from './roll.command.js'
-
+import giftCommand from './gift.command.js'
 
 export const CommandType = {
   SYNC_USERS: '/sync-users',
@@ -13,7 +13,8 @@ export const CommandType = {
   HELP: '/help',
   REPORT: '/report',
   CHECK_LOH: '/check-loh',
-  ROLL: '/roll'
+  ROLL: '/roll',
+  GIFT: '/gift',
 }
 
 export const CommandMap = {
@@ -23,6 +24,7 @@ export const CommandMap = {
   [CommandType.REPORT]: reportCommand,
   [CommandType.CHECK_LOH]: checkLohCommand,
   [CommandType.ROLL]: rollCommand,
+  [CommandType.GIFT]: giftCommand,
   '/1': addNexiaCommand,
   '/2': addNexiaCommand,
   '/3': addNexiaCommand,
