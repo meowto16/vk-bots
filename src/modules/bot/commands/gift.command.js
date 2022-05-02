@@ -48,6 +48,10 @@ const giftCommand = async (ctx) => {
     return ctx.reply(`Это не твоя нексия, ее нельзя подарить. Нексия принадлежит @${nexiaUserOwner.nickname}`)
   }
 
+  if (ctx.message.from_id === recipientUser.id) {
+  	return ctx.reply('Нельзя подарить нексию самому себе')
+  }
+
   try {
     await NexiaService.changeOwner({ 
       nexia_id: nexia.nexia_id, 
