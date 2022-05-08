@@ -37,7 +37,7 @@ export const SCORE_CONGRATULATIONS = {
     sticker: AKIO_STRONG,
   },
   75: {
-    message: 'У $USER$ всё пучком. Уже 75 нексий!',
+    message: '$USER$ - фотографирую нексят, будто пару лет назад... Уже 75 нексий!',
     sticker: AKIO_COOL,
   },
   100: {
