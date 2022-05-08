@@ -17,7 +17,7 @@ export const SCORE_CONGRATULATIONS = {
     sticker: AKIO_BIRTHDAY,
   },
   5: {
-    message: 'Моё уважение, пять нексий у $USER',
+    message: 'Моё уважение, пять нексий у $USER$',
     sticker: AKIO_WINKS,
   },
   10: {
