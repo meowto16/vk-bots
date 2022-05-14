@@ -29,7 +29,7 @@ export const SCORE_CONGRATULATIONS = {
     sticker: AKIO_DANG,
   },
   30: {
-    message: 'Растет маленький чемпион - $USER. Уже 30 нексий!',
+    message: 'Растет маленький чемпион - $USER$. Уже 30 нексий!',
     sticker: AKIO_LOL,
   },
   50: {
