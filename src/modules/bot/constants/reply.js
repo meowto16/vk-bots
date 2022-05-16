@@ -8,7 +8,16 @@ import {
   AKIO_WAITING,
   AKIO_BATTLE,
   AKIO_WINKS,
-  AKIO_COOL, AKIO_HORNY, AKIO_GOOD_BOY, AKIO_WAR, AKIO_NODS, AKIO_STUPID, AKIO_LAUGHING, AKIO_CONFUSED, AKIO_LOL,
+  AKIO_COOL,
+  AKIO_HORNY,
+  AKIO_GOOD_BOY,
+  AKIO_WAR,
+  AKIO_NODS,
+  AKIO_STUPID,
+  AKIO_LAUGHING,
+  AKIO_CONFUSED,
+  AKIO_LOL,
+  AKIO_PRINCESS,
 } from '../../../core/constants/stickers.js'
 
 export const SCORE_CONGRATULATIONS = {
@@ -31,6 +40,10 @@ export const SCORE_CONGRATULATIONS = {
   30: {
     message: 'Растет маленький чемпион - $USER$. Уже 30 нексий!',
     sticker: AKIO_LOL,
+  },
+  40: {
+    message: 'Полный чика-бамбоня... $USER$ набирает уже 40 нексий!',
+    sticker: AKIO_PRINCESS,
   },
   50: {
     message: 'Узбеки боялись, что $USER$ найдет все нексии города... Уже 50 нексий!',

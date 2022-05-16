@@ -17,3 +17,4 @@ export const AKIO_LOL = 50908
 export const AKIO_STUPID = 50901
 export const AKIO_NODS = 50898
 export const AKIO_CONFUSED = 50899
+export const AKIO_PRINCESS = 50906
