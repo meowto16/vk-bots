@@ -1,10 +1,12 @@
+import plural from 'plural-ru'
+
 import { getUsersWithScore } from '../utils/getUsersWithScore.js'
 import NexiaService from '../../nexias/Nexia.service.js'
 import UserService from '../../users/User.service.js'
-import { CommandType } from './index.js'
 import createReplyChain from '../utils/createReplyChain.js'
-import plural from 'plural-ru'
 import { AKIO_BIRTHDAY } from '../../../core/constants/stickers.js'
+
+import { CommandType } from './index.js'
 
 const giftCommand = async (ctx) => {
   if (!ctx.message.reply_message) {
@@ -49,7 +51,7 @@ const giftCommand = async (ctx) => {
   }
 
   if (ctx.message.from_id === recipientUser.id) {
-  	return ctx.reply('Нельзя подарить нексию самому себе')
+    return ctx.reply('Нельзя подарить нексию самому себе')
   }
 
   try {

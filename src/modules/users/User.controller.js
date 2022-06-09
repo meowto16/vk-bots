@@ -1,5 +1,6 @@
 import Controller from '../../core/classes/Controller.js'
 import Response from '../../core/utils/classes/Response.js'
+
 import UserService from './User.service.js'
 
 class UserController extends Controller {

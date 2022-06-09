@@ -1,4 +1,5 @@
 import Service from '../../core/classes/Service.js'
+
 import UserRepository from './User.repository.js'
 
 class UserService extends Service {

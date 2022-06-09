@@ -1,4 +1,5 @@
 import Service from '../../core/classes/Service.js'
+
 import NexiaRepository from './Nexia.repository.js'
 
 class NexiaService extends Service {

@@ -1,6 +1,7 @@
+import plural from 'plural-ru'
+
 import NexiaService from '../../nexias/Nexia.service.js'
 import Configuration from '../../../core/utils/classes/Configuration.js'
-import plural from 'plural-ru'
 import { AKIO_POLICE } from '../../../core/constants/stickers.js'
 import UserService from '../../users/User.service.js'
 import createReplyChain from '../utils/createReplyChain.js'

@@ -1,8 +1,8 @@
 import Controller from '../../core/classes/Controller.js'
 import Response from '../../core/utils/classes/Response.js'
+import UserService from '../users/User.service.js'
 
 import NexiaService from './Nexia.service.js'
-import UserService from '../users/User.service.js'
 
 class NexiaController extends Controller {
   static async get(req, res) {
