@@ -22,15 +22,15 @@ import {
 
 export const SCORE_CONGRATULATIONS = {
   1: {
-    message: 'Поздравим $USER$ с первой нексией!',
+    message: '$USER$, поздравляем с первой нексией!',
     sticker: AKIO_BIRTHDAY,
   },
   5: {
-    message: 'Моё уважение, пять нексий у $USER$',
+    message: 'Моё уважение! $USER$ набирает уже 5 нексий!',
     sticker: AKIO_WINKS,
   },
   10: {
-    message: 'Ого! Кажется у $USER$ уже целых 10 нексий!',
+    message: 'Ого! Кажется $USER$ пополняет свой счет. Уже 10 нексий!',
     sticker: AKIO_NERD,
   },
   20: {
@@ -82,7 +82,7 @@ export const SCORE_CONGRATULATIONS = {
     sticker: AKIO_NODS,
   },
   400: {
-    message: 'Предлагаю присвоить $USER$ черный пояс по нексиям..  Уже 400 нексий!',
+    message: '$USER$ получает черный пояс по нексиям..  Уже 400 нексий!',
     sticker: AKIO_LAUGHING,
   },
   450: {
@@ -90,11 +90,11 @@ export const SCORE_CONGRATULATIONS = {
     sticker: AKIO_CONFUSED,
   },
   500: {
-    message: 'Кажется $USER$ знает уже все нексии этой страны.. Уже 500 нексий!',
+    message: 'Кажется, $USER$ знает уже все нексии этой страны.. Уже 500 нексий!',
     sticker: AKIO_OMAEWA,
   },
   1000: {
-    message: 'Всем молчать, король нексий - $USER$ идет. Ровно 1000 нексий!',
     sticker: AKIO_BATTLE,
+     message: 'Всем молчать, ужас нексий - $USER$ идет. Ровно 1000 нексий!',
   }
 }
