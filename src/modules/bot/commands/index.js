@@ -6,6 +6,7 @@ import reportCommand from './report.command.js'
 import checkLohCommand from './check-loh.command.js'
 import rollCommand from './roll.command.js'
 import giftCommand from './gift.command.js'
+import justiceCommand from './justice.command.js'
 
 export const CommandType = {
   SYNC_USERS: '/sync-users',
@@ -15,16 +16,10 @@ export const CommandType = {
   CHECK_LOH: '/check-loh',
   ROLL: '/roll',
   GIFT: '/gift',
+  JUSTICE: '/justice',
 }
 
-export const CommandMap = {
-  [CommandType.SYNC_USERS]: syncUsersCommand,
-  [CommandType.RATING]: ratingCommand,
-  [CommandType.HELP]: helpCommand,
-  [CommandType.REPORT]: reportCommand,
-  [CommandType.CHECK_LOH]: checkLohCommand,
-  [CommandType.ROLL]: rollCommand,
-  [CommandType.GIFT]: giftCommand,
+const addNexiaCommands = {
   '/1': addNexiaCommand,
   '/2': addNexiaCommand,
   '/3': addNexiaCommand,
@@ -45,4 +40,18 @@ export const CommandMap = {
   '/18': addNexiaCommand,
   '/19': addNexiaCommand,
   '/20': addNexiaCommand,
+}
+
+export const addNexiaKeys = Object.keys(addNexiaCommands)
+
+export const CommandMap = {
+  [CommandType.SYNC_USERS]: syncUsersCommand,
+  [CommandType.RATING]: ratingCommand,
+  [CommandType.HELP]: helpCommand,
+  [CommandType.REPORT]: reportCommand,
+  [CommandType.CHECK_LOH]: checkLohCommand,
+  [CommandType.ROLL]: rollCommand,
+  [CommandType.GIFT]: giftCommand,
+  [CommandType.JUSTICE]: justiceCommand,
+  ...addNexiaCommands,
 }

@@ -49,6 +49,7 @@ const addNexiaCommand = async (ctx) => {
     `✅ ОК
     - ${plural(count, 'Добавлена', 'Добавлено', 'Добавлены')} ${count} ${plural(count, 'нексия', 'нексии', 'нексий')} 
     - Твой счёт: ${userProfile.score}
+    - Автор: (${userProfile.firstName} ${userProfile.lastName})
   `)
 
   await congratsByScore(userProfile, answer)
