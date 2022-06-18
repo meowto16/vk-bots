@@ -31,7 +31,7 @@ const addNexiaCommand = async (ctx) => {
   const zSizedPhoto = photo.photo.sizes.find(size => size.type === 'z')
   const ySizedPhoto = photo.photo.sizes.find(size => size.type === 'z')
 
-  const photoUrl = wSizedPhoto.url || zSizedPhoto.url || ySizedPhoto.url
+  const photoUrl = wSizedPhoto?.url || zSizedPhoto?.url || ySizedPhoto?.url
 
   await nexiaService.create({
     image: photoUrl,
