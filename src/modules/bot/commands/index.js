@@ -7,6 +7,7 @@ import checkLohCommand from './check-loh.command.js'
 import rollCommand from './roll.command.js'
 import giftCommand from './gift.command.js'
 import justiceCommand from './justice.command.js'
+import kingCommand from './king.command.js'
 
 export const CommandType = {
   SYNC_USERS: '/sync-users',
@@ -17,6 +18,7 @@ export const CommandType = {
   ROLL: '/roll',
   GIFT: '/gift',
   JUSTICE: '/justice',
+  KING: '/king',
 }
 
 const addNexiaCommands = {
@@ -53,5 +55,6 @@ export const CommandMap = {
   [CommandType.ROLL]: rollCommand,
   [CommandType.GIFT]: giftCommand,
   [CommandType.JUSTICE]: justiceCommand,
+  [CommandType.KING]: kingCommand,
   ...addNexiaCommands,
 }

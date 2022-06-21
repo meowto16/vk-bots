@@ -14,6 +14,17 @@ class NexiaService extends Service {
     return nexias
   }
 
+  static async getWithMaxCount() {
+    const nexiaRepository = new NexiaRepository()
+    await nexiaRepository.connect()
+
+    const nexia = await nexiaRepository.getWithMaxCount()
+
+    await nexiaRepository.close()
+
+    return nexia
+  }
+
   static async getById({ nexia_id }) {
     const nexiaRepository = new NexiaRepository()
     await nexiaRepository.connect()

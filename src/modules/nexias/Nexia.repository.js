@@ -10,6 +10,17 @@ class NexiaRepository extends Repository {
     return rows
   }
 
+  async getWithMaxCount() {
+    const { rows } = await this.client.query(`
+        SELECT *
+        FROM nexias
+        ORDER BY count DESC, created_at DESC
+        LIMIT 1
+    `)
+
+    return rows[0]
+  }
+
   async getById(nexia_id) {
     const { rows } = await this.client.query(`
         SELECT nexia_id, created_at, image, count, belongs_to_user_id, message_id
