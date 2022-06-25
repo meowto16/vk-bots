@@ -40,8 +40,8 @@ const kingCommand = async (ctx) => {
 
   return ctx.reply(
     'Найден король нексий 😎\n\n'
-    + `Автор: ${kingProfile.first_name} ${kingProfile.last_name}\n`
-    + `Счет: ${nexiaCount}!`,
+    + `👑 Автор: ${kingProfile.first_name} ${kingProfile.last_name}\n`
+    + `💎 Счет: ${nexiaCount}!`,
     bestNexia.image
   )
 }
