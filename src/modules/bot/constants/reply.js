@@ -57,6 +57,10 @@ export const SCORE_CONGRATULATIONS = {
     message: 'Никто и подумать не мог, что $USER$ может вытворить... Уже 100 нексий!',
     sticker: AKIO_TAPPING,
   },
+  111: {
+  	message: '$USER$ набирает адын адын адын!!! Уже 111 нексий!',
+  	sticker: AKIO_WINKS,
+  },
   150: {
     message: 'Так держать, $USER$. Когда-нибудь у тебя будет своя настоящая нексия... Уже 150 нексий!',
     sticker: AKIO_GOOD_BOY,
